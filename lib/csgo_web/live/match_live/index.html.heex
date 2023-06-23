@@ -1,0 +1,31 @@
+<div class="flex items-center mx-auto justify-center mt-4 w-[800px]">
+  <h2 class="uppercase text-orange-400 text-2xl pr-2 w-[288px] text-right">Terrorists</h2>
+  <div class="font-bold text-4xl text-orange-400 px-4 w-16 text-center"><%= @t_score %></div>
+  <div class="w-24 text-center">
+    <span class="text-zinc-100 text-xl font-bold"><%= @time %></span>
+  </div>
+  <div class="font-bold text-4xl text-blue-400 px-4 w-16 text-center"><%= @ct_score %></div>
+  <h2 class="uppercase text-blue-400 text-2xl pl-2 w-[288px] text-left">Counter-Terrorists</h2>
+</div>
+
+<div class="m-4 w-[512px] h-[512px] mx-auto relative">
+  <img src="/images/de_dust2.png" class="w-[512px] h-[512px] mx-auto" />
+  <%= if !Enum.empty?(Map.keys(@player_positions)) do %>
+    <%= for {team, position} <- @player_positions do %>
+      <%= render_player_position(team, position) %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="grid grid-cols-2 gap-8 w-[1024px] mx-auto">
+  <div class="grid grid-rows-5 gap-2">
+    <%= for player <- @ct_team do  %>
+      <%= render_player("CT", player) %>
+    <% end %>
+  </div>
+  <div class="grid grid-rows-5 gap-2">
+    <%= for player <- @t_team do  %>
+      <%= render_player("T", player) %>
+    <% end %>
+  </div>
+</div>
